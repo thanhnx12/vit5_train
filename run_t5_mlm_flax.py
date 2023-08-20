@@ -570,8 +570,8 @@ def main():
         datasets = load_dataset(
             data_args.dataset_name,
             data_args.dataset_config_name,
-            cache_dir=model_args.cache_dir,
-            token=model_args.token,
+            cache_dir=model_args.cache_dir
+            #token=model_args.token,
         )
 
         if "validation" not in datasets.keys():
@@ -579,15 +579,15 @@ def main():
                 data_args.dataset_name,
                 data_args.dataset_config_name,
                 split=f"train[:{data_args.validation_split_percentage}%]",
-                cache_dir=model_args.cache_dir,
-                token=model_args.token,
+                cache_dir=model_args.cache_dir
+                #token=model_args.token,
             )
             datasets["train"] = load_dataset(
                 data_args.dataset_name,
                 data_args.dataset_config_name,
                 split=f"train[{data_args.validation_split_percentage}%:]",
-                cache_dir=model_args.cache_dir,
-                token=model_args.token,
+                cache_dir=model_args.cache_dir
+                #token=model_args.token,
             )
     else:
         data_files = {}
@@ -610,15 +610,15 @@ def main():
                 extension,
                 data_files=data_files,
                 split=f"train[:{data_args.validation_split_percentage}%]",
-                cache_dir=model_args.cache_dir,
-                token=model_args.token,
+                cache_dir=model_args.cache_dir
+                #token=model_args.token,
             )
             datasets["train"] = load_dataset(
                 extension,
                 data_files=data_files,
                 split=f"train[{data_args.validation_split_percentage}%:]",
-                cache_dir=model_args.cache_dir,
-                token=model_args.token,
+                cache_dir=model_args.cache_dir
+                #token=model_args.token,
             )
     # See more about loading any type of standard or custom dataset (from files, python dict, pandas DataFrame, etc) at
     # https://huggingface.co/docs/datasets/loading_datasets.html.
@@ -629,15 +629,15 @@ def main():
         tokenizer = AutoTokenizer.from_pretrained(
             model_args.tokenizer_name,
             cache_dir=model_args.cache_dir,
-            use_fast=model_args.use_fast_tokenizer,
-            token=model_args.token,
+            use_fast=model_args.use_fast_tokenizer
+            #token=model_args.token,
         )
     elif model_args.model_name_or_path:
         tokenizer = AutoTokenizer.from_pretrained(
             model_args.model_name_or_path,
             cache_dir=model_args.cache_dir,
-            use_fast=model_args.use_fast_tokenizer,
-            token=model_args.token,
+            use_fast=model_args.use_fast_tokenizer
+            #token=model_args.token,
         )
     else:
         raise ValueError(
@@ -649,14 +649,14 @@ def main():
         config = T5Config.from_pretrained(
             model_args.config_name,
             cache_dir=model_args.cache_dir,
-            vocab_size=len(tokenizer),
-            token=model_args.token,
+            vocab_size=len(tokenizer)
+            #token=model_args.token,
         )
     elif model_args.model_name_or_path:
         config = T5Config.from_pretrained(
             model_args.model_name_or_path,
-            cache_dir=model_args.cache_dir,
-            token=model_args.token,
+            cache_dir=model_args.cache_dir
+            #token=model_args.token,
         )
     else:
         config = CONFIG_MAPPING[model_args.model_type]()
@@ -750,8 +750,8 @@ def main():
             model_args.model_name_or_path,
             config=config,
             seed=training_args.seed,
-            dtype=getattr(jnp, model_args.dtype),
-            token=model_args.token,
+            dtype=getattr(jnp, model_args.dtype)
+            #token=model_args.token,
         )
     else:
         config.vocab_size = len(tokenizer)
