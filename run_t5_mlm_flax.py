@@ -570,8 +570,8 @@ def main():
         datasets = load_dataset(
             data_args.dataset_name,
             data_args.dataset_config_name,
-            cache_dir=model_args.cache_dir
-            #token=model_args.token,
+            cache_dir=model_args.cache_dir,
+            token=model_args.token,
         )
 
         if "validation" not in datasets.keys():
@@ -601,8 +601,8 @@ def main():
         datasets = load_dataset(
             extension,
             data_files=data_files,
-            cache_dir=model_args.cache_dir,
-            token=model_args.token,
+            cache_dir=model_args.cache_dir
+            #token=model_args.token,
         )
 
         if "validation" not in datasets.keys():
